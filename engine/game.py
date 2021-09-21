@@ -1,6 +1,6 @@
-import sys
 import pygame
-from engine.background import bg_channel
+from engine.background import BackgroundChannel
+from engine.gameConfig import GameConfig
 
 
 pygame.init()
@@ -14,10 +14,16 @@ scaling_factor = min(tuple(a / b for a, b in zip(full_screen_size, display_size)
 class Game(object):
     win = pygame.display.set_mode(full_screen_size)
     show_colors: bool = True
-    bg: tuple = (
-        bg_channel(value=100, amount=1, sign=1, position=0),
-        bg_channel(value=140, amount=2, sign=-1, position=1),
-        bg_channel(value=200, amount=3, sign=1, position=2),
+    bg: tuple = tuple(
+        [
+            BackgroundChannel(
+                value=GameConfig.values[i],
+                amount=GameConfig.amounts[i],
+                sign=GameConfig.signs[i],
+                position=i,
+            )
+            for i in range(3)
+        ]
     )
 
     @classmethod
