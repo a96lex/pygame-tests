@@ -2,7 +2,8 @@ import pygame
 
 COLOR_TRESHOLD = 0
 
-class bg_channel(object):
+
+class BackgroundChannel(object):
     value: int
     amount: int
     sign: int
